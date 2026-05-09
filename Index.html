@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>PMB Universitas Pamulang | Pendaftaran Mahasiswa Baru</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #e9f0fc 0%, #d9e3f0 100%);
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+    }
+
+    .pmb-container {
+      max-width: 1500px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+
+    .portal-header {
+      background: #0b2b44;
+      background-image: linear-gradient(135deg, #0a2a42 0%, #0d3553 100%);
+      padding: 1.2rem 2rem;
+      border-bottom: 4px solid #ffb347;
+    }
+
+    .portal-header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .portal-header h1 small {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #ffd966;
+      margin-left: 12px;
+    }
+
+    .portal-header .sub {
+      color: #cbdbe6;
+      font-size: 0.9rem;
+      margin-top: 6px;
+      border-left: 3px solid #ffb347;
+      padding-left: 12px;
+    }
+
+    .dashboard-grid {
+      padding: 2rem 2rem 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .form-panel {
+      background: #fefefe;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2edf7;
+    }
+
+    .form-title {
+      background: #f8fafd;
+      padding: 1rem 1.8rem;
+      border-bottom: 2px solid #e0e9f2;
+    }
+
+    .form-title h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1e4663;
+      border-left: 5px solid #f4a261;
+      padding-left: 14px;
+    }
+
+    .input-section {
+      padding: 1.5rem 1.8rem;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .form-group {
+      flex: 1 1 240px;
+      min-width: 180px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #2c6280;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.9rem;
+      border: 1.5px solid #dce5ef;
+      border-radius: 1rem;
+      background: white;
+      transition: 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      border-color: #f4a261;
+      box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.2);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      padding-top: 0.3rem;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: #2c3e4e;
+      cursor: pointer;
+    }
+
+    .btn-group-action {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      padding: 0.75rem 1.8rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+      background: #eef3fa;
+      color: #1f5068;
+    }
+
+    .btn-primary {
+      background: #1e6f5c;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .btn-primary:hover {
+      background: #0e5e4c;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: #e9ecef;
+      color: #2c3e50;
+    }
+    .btn-secondary:hover {
+      background: #d4dee8;
+    }
+
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      background: #f1f6fd;
+      border-radius: 1.2rem;
+      padding: 1rem 1.8rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 2rem;
+      padding: 0.4rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      font-weight: 600;
+    }
+    .stat-card span:first-child {
+      color: #2f5e7a;
+      margin-right: 12px;
+    }
+    .stat-card span:last-child {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1e4663;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 1rem;
+      border: 1px solid #e9edf2;
+      background: white;
+      margin-top: 0.8rem;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      min-width: 1000px;
+    }
+
+    .data-table th {
+      background: #1e3a5f;
+      color: white;
+      padding: 12px 8px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .data-table td {
+      padding: 10px 6px;
+      text-align: center;
+      border-bottom: 1px solid #eef2f7;
+      color: #1f2f3e;
+    }
+
+    .data-table tr:hover {
+      background: #fef9ef;
+    }
+
+    .action-icons button {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin: 0 4px;
+      padding: 4px 6px;
+      border-radius: 20px;
+    }
+    .edit-btn { color: #2c6e9e; }
+    .edit-btn:hover { background: #e3f0fa; }
+    .delete-btn { color: #c44536; }
+    .delete-btn:hover { background: #ffe6e2; }
+
+    .lulus-badge {
+      background: #c8f0e6;
+      color: #006b4c;
+      font-weight: bold;
+      border-radius: 40px;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      display: inline-block;
+    }
+    .tidak-badge {
+      background: #ffe2dd;
+      color: #b13e2d;
+      font-weight: bold;
+      border-radius: 40px;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+    }
+
+    footer {
+      padding: 1rem 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #6b85a0;
+      border-top: 1px solid #e2edf2;
+    }
+
+    @media (max-width: 750px) {
+      body { padding: 1rem; }
+      .dashboard-grid { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="pmb-container">
+  <div class="portal-header">
+    <h1>PORTAL PMB <small>Universitas Malalang</small></h1>
+    <div class="sub">Sistem Pendaftaran Mahasiswa Baru | Gelombang 1</div>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- Form Input Pendaftaran -->
+    <div class="form-panel">
+      <div class="form-title">
+        <h2>📝 INPUT PENDAFTARAN</h2>
+      </div>
+      <div class="input-section">
+        <div class="form-row">
+          <div class="form-group">
+            <label>📊 JUMLAH INPUT DATA</label>
+            <input type="text" id="totalInputDataDisplay" readonly value="0" style="background:#f1f5f9; font-weight:bold;">
+          </div>
+          <div class="form-group">
+            <label>🏫 ASAL SEKOLAH</label>
+            <input type="text" id="asalSekolah" placeholder="Nama SMA/SMK ...">
+          </div>
+          <div class="form-group">
+            <label>🔰 KODE PENDAFTARAN (A/B/V)</label>
+            <select id="kodeKategori">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="V">V</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>🆔 CONTROL (Suffix Kode)</label>
+            <input type="text" id="controlSuffix" placeholder="contoh: 1-101-9" value="1-101-9">
+            <small style="font-size:10px;">Gabungan = Kategori + Control</small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>👨‍👩 PEKERJAAN </label>
+            <input type="text" id="pekerjaanOrtu" placeholder="PG, Wiraswasta, PNS ...">
+          </div>
+          <div class="form-group">
+            <label>🧑‍🎓 NAMA PENDAFTAR</label>
+            <input type="text" id="namaPendaftar" placeholder="Nama Lengkap">
+          </div>
+          <div class="form-group">
+            <label>⚧ JENIS KELAMIN</label>
+            <div class="radio-group">
+              <label><input type="radio" name="gender" value="Laki-laki" checked> Laki-laki</label>
+              <label><input type="radio" name="gender" value="Perempuan"> Perempuan</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>📍 TEMPAT LAHIR</label>
+            <input type="text" id="tempatLahir" placeholder="Kota Lahir">
+          </div>
+          <div class="form-group">
+            <label>📅 TANGGAL LAHIR</label>
+            <input type="date" id="tglLahir">
+          </div>
+          <div class="form-group">
+            <label>🏢 LOKASI TES</label>
+            <input type="text" id="lokasiTes" placeholder="Gedung A, Viktor, dll">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>📖 NILAI TES (ING)</label>
+            <input type="number" id="nilaiIng" value="0" min="0" max="100" step="1">
+          </div>
+          <div class="form-group">
+            <label>🧮 NILAI TES (MAT)</label>
+            <input type="number" id="nilaiMat" value="0" min="0" max="100">
+          </div>
+          <div class="form-group">
+            <label>📚 NILAI TES (UMUM)</label>
+            <input type="number" id="nilaiUmum" value="0" min="0" max="100">
+          </div>
+        </div>
+
+        <div class="btn-group-action">
+          <button class="btn btn-primary" id="simpanBtn">💾 SIMPAN</button>
+          <button class="btn btn-secondary" id="nextBtn">⏩ NEXT / RESET FORM</button>
+        </div>
+        <div id="formFeedback" style="margin-top: 12px; font-size:0.75rem; color:#c44536;"></div>
+      </div>
+    </div>
+
+    <!-- Ringkasan Statistik -->
+    <div class="stats-row">
+      <div class="stat-card"><span>📋 JUMLAH PENDAFTAR</span> <span id="totalPendaftar">0</span></div>
+      <div class="stat-card"><span>✅ LULUS</span> <span id="totalLulus">0</span></div>
+      <div class="stat-card"><span>❌ TIDAK LULUS</span> <span id="totalTidakLulus">0</span></div>
+    </div>
+
+    <!-- TABEL DATA PENDAFTAR -->
+    <div>
+      <div style="margin-bottom: 0.8rem; font-weight: 700; font-size: 1.2rem; color:#1e3a5f;">📋 TABEL DATA PENDAFTAR</div>
+      <div class="table-wrapper">
+        <table class="data-table" id="dataTable">
+          <thead>
+            <tr><th>KODE</th><th>NAMA</th><th>TEMPAT LAHIR</th><th>JK</th><th>TGL LAHIR</th>
+              <th>PEKERJAAN</th><th>LOKASI TES</th><th>ING</th><th>MAT</th><th>UMUM</th><th>RATA</th><th>KETERANGAN</th><th>AKSI</th></tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <footer>© 2026 PMB Universitas Malalang - Sistem Informasi Pendaftaran Terintegrasi</footer>
+</div>
+
+<script>
+  // ---------- DATA AWAL (sesuai contoh gambar) ----------
+  let registrants = [
+    {
+      id: "r1",
+      kode: "A1-101-9",
+      kategori: "A",
+      controlRaw: "1-101-9",
+      asalSekolah: "SMA Negeri 8 Tangerang",
+      nama: "Fariz Adiliah Muhamad",
+      tempatLahir: "Tangerang Selatan",
+      jk: "Laki-laki",
+      tglLahir: "2000-05-19",
+      pekerjaan: "PG",
+      lokasiTes: "Gedung A",
+      ing: 80,
+      mat: 100,
+      umum: 60,
+      rata: 80.0,
+      keterangan: "LULUS"
+    },
+    {
+      id: "r2",
+      kode: "V2-108-2",
+      kategori: "V",
+      controlRaw: "2-108-2",
+      asalSekolah: "SMK Tunas Bangsa",
+      nama: "Bryan Prathama Selby",
+      tempatLahir: "Tangerang Selatan",
+      jk: "Laki-laki",
+      tglLahir: "2026-05-19",
+      pekerjaan: "Wiraswasta",
+      lokasiTes: "Viktor",
+      ing: 5,
+      mat: 5,
+      umum: 5,
+      rata: 5.0,
+      keterangan: "TIDAK LULUS"
+    }
+  ];
+
+  let nextId = 3;
+  let editMode = false;
+  let editTargetId = null;
+
+  // DOM elements
+  const totalInputSpan = document.getElementById("totalInputDataDisplay");
+  const asalSekolahInput = document.getElementById("asalSekolah");
+  const kodeKategori = document.getElementById("kodeKategori");
+  const controlSuffix = document.getElementById("controlSuffix");
+  const pekerjaanOrtu = document.getElementById("pekerjaanOrtu");
+  const namaPendaftar = document.getElementById("namaPendaftar");
+  const genderRadios = document.querySelectorAll('input[name="gender"]');
+  const tempatLahirInput = document.getElementById("tempatLahir");
+  const tglLahirInput = document.getElementById("tglLahir");
+  const lokasiTesInput = document.getElementById("lokasiTes");
+  const nilaiIng = document.getElementById("nilaiIng");
+  const nilaiMat = document.getElementById("nilaiMat");
+  const nilaiUmum = document.getElementById("nilaiUmum");
+  const simpanBtn = document.getElementById("simpanBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const tableBody = document.getElementById("tableBody");
+  const totalPendaftarSpan = document.getElementById("totalPendaftar");
+  const totalLulusSpan = document.getElementById("totalLulus");
+  const totalTidakLulusSpan = document.getElementById("totalTidakLulus");
+  const formFeedback = document.getElementById("formFeedback");
+
+  // Helper: hitung rata dan status
+  function computeAverageAndStatus(ing, mat, umum) {
+    let avg = (ing + mat + umum) / 3;
+    let rounded = Math.round(avg * 10) / 10;
+    let status = rounded >= 60 ? "LULUS" : "TIDAK LULUS";
+    return { rata: rounded, keterangan: status };
+  }
+
+  function buildFinalKode(kategori, control) {
+    if (!control.trim()) return kategori;
+    return kategori + control.trim();
+  }
+
+  function resetFormFields() {
+    asalSekolahInput.value = "";
+    kodeKategori.value = "A";
+    controlSuffix.value = "1-101-9";
+    pekerjaanOrtu.value = "";
+    namaPendaftar.value = "";
+    document.querySelector('input[name="gender"][value="Laki-laki"]').checked = true;
+    tempatLahirInput.value = "";
+    tglLahirInput.value = "";
+    lokasiTesInput.value = "";
+    nilaiIng.value = "0";
+    nilaiMat.value = "0";
+    nilaiUmum.value = "0";
+    editMode = false;
+    editTargetId = null;
+    formFeedback.innerText = "";
+  }
+
+  function getFormData() {
+    let genderValue = "Laki-laki";
+    for (let radio of genderRadios) if (radio.checked) { genderValue = radio.value; break; }
+    let ing = parseInt(nilaiIng.value) || 0;
+    let mat = parseInt(nilaiMat.value) || 0;
+    let umum = parseInt(nilaiUmum.value) || 0;
+    ing = Math.min(100, Math.max(0, ing));
+    mat = Math.min(100, Math.max(0, mat));
+    umum = Math.min(100, Math.max(0, umum));
+    const { rata, keterangan } = computeAverageAndStatus(ing, mat, umum);
+    const kategori = kodeKategori.value;
+    const controlRaw = controlSuffix.value.trim();
+    if (!controlRaw) throw new Error("CONTROL (suffix kode) tidak boleh kosong!");
+    const finalKode = buildFinalKode(kategori, controlRaw);
+    return {
+      kode: finalKode,
+      kategori: kategori,
+      controlRaw: controlRaw,
+      asalSekolah: asalSekolahInput.value.trim() || "-",
+      nama: namaPendaftar.value.trim(),
+      tempatLahir: tempatLahirInput.value.trim(),
+      jk: genderValue,
+      tglLahir: tglLahirInput.value,
+      pekerjaan: pekerjaanOrtu.value.trim() || "-",
+      lokasiTes: lokasiTesInput.value.trim() || "-",
+      ing, mat, umum, rata, keterangan
+    };
+  }
+
+  function validateRequired(formData) {
+    if (!formData.nama) return "Nama pendaftar wajib diisi!";
+    if (!formData.tempatLahir) return "Tempat lahir wajib diisi!";
+    if (!formData.tglLahir) return "Tanggal lahir wajib diisi!";
+    if (!formData.pekerjaan || formData.pekerjaan === "-") return "Pekerjaan orang tua wajib diisi!";
+    if (!formData.lokasiTes || formData.lokasiTes === "-") return "Lokasi tes wajib diisi!";
+    if (!formData.asalSekolah || formData.asalSekolah === "-") return "Asal sekolah wajib diisi!";
+    return null;
+  }
+
+  function isDuplicateKode(kode, excludeId = null) {
+    return registrants.some(r => r.kode === kode && (excludeId === null || r.id !== excludeId));
+  }
+
+  function saveRegistration() {
+    try {
+      let formData = getFormData();
+      const validationError = validateRequired(formData);
+      if (validationError) {
+        formFeedback.innerText = validationError;
+        return;
+      }
+      if (editMode && editTargetId) {
+        if (isDuplicateKode(formData.kode, editTargetId)) {
+          formFeedback.innerText = `Gagal update: Kode "${formData.kode}" sudah digunakan.`;
+          return;
+        }
+        const index = registrants.findIndex(r => r.id === editTargetId);
+        if (index !== -1) {
+          registrants[index] = { ...formData, id: editTargetId };
+          formFeedback.innerText = "✅ Data berhasil diupdate!";
+        } else {
+          formFeedback.innerText = "Error: data tidak ditemukan.";
+          return;
+        }
+        editMode = false;
+        editTargetId = null;
+      } else {
+        if (isDuplicateKode(formData.kode, null)) {
+          formFeedback.innerText = `Gagal simpan: Kode "${formData.kode}" sudah ada! Gunakan CONTROL lain.`;
+          return;
+        }
+        const newId = "r" + nextId++;
+        registrants.push({ ...formData, id: newId });
+        formFeedback.innerText = "✅ Pendaftar baru berhasil ditambahkan!";
+      }
+      renderTableAndStats();
+      resetFormFields();
+    } catch (err) {
+      formFeedback.innerText = err.message;
+    }
+  }
+
+  function editRegistration(id) {
+    const reg = registrants.find(r => r.id === id);
+    if (!reg) return;
+    asalSekolahInput.value = reg.asalSekolah === "-" ? "" : reg.asalSekolah;
+    kodeKategori.value = reg.kategori;
+    controlSuffix.value = reg.controlRaw;
+    pekerjaanOrtu.value = reg.pekerjaan === "-" ? "" : reg.pekerjaan;
+    namaPendaftar.value = reg.nama;
+    if (reg.jk === "Laki-laki") document.querySelector('input[name="gender"][value="Laki-laki"]').checked = true;
+    else document.querySelector('input[name="gender"][value="Perempuan"]').checked = true;
+    tempatLahirInput.value = reg.tempatLahir;
+    tglLahirInput.value = reg.tglLahir;
+    lokasiTesInput.value = reg.lokasiTes === "-" ? "" : reg.lokasiTes;
+    nilaiIng.value = reg.ing;
+    nilaiMat.value = reg.mat;
+    nilaiUmum.value = reg.umum;
+    editMode = true;
+    editTargetId = id;
+    formFeedback.innerText = "✏️ Mode Edit: ubah data lalu tekan SIMPAN.";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function deleteRegistration(id) {
+    if (confirm("Hapus data pendaftar ini?")) {
+      registrants = registrants.filter(r => r.id !== id);
+      if (editMode && editTargetId === id) resetFormFields();
+      renderTableAndStats();
+      formFeedback.innerText = "🗑 Data berhasil dihapus.";
+    }
+  }
+
+  function renderTableAndStats() {
+    totalInputSpan.value = registrants.length;
+    totalPendaftarSpan.innerText = registrants.length;
+    const lulusCount = registrants.filter(r => r.keterangan === "LULUS").length;
+    totalLulusSpan.innerText = lulusCount;
+    totalTidakLulusSpan.innerText = registrants.length - lulusCount;
+
+    tableBody.innerHTML = "";
+    if (registrants.length === 0) {
+      tableBody.innerHTML = `<tr><td colspan="13" style="text-align:center; padding:2rem;">Belum ada data pendaftar. Silakan tambah.</td></tr>`;
+      return;
+    }
+
+    registrants.forEach(reg => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td style="font-weight:600;">${escapeHtml(reg.kode)}</td>
+        <td>${escapeHtml(reg.nama)}</td>
+        <td>${escapeHtml(reg.tempatLahir)}</td>
+        <td>${escapeHtml(reg.jk)}</td>
+        <td>${escapeHtml(reg.tglLahir)}</td>
+        <td>${escapeHtml(reg.pekerjaan)}</td>
+        <td>${escapeHtml(reg.lokasiTes)}</td>
+        <td>${reg.ing}</td>
+        <td>${reg.mat}</td>
+        <td>${reg.umum}</td>
+        <td>${reg.rata.toFixed(1)}</td>
+        <td><span class="${reg.keterangan === 'LULUS' ? 'lulus-badge' : 'tidak-badge'}">${reg.keterangan}</span></td>
+        <td class="action-icons">
+          <button class="edit-btn" data-id="${reg.id}" title="Edit">✏️</button>
+          <button class="delete-btn" data-id="${reg.id}" title="Hapus">🗑️</button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+    document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', (e) => editRegistration(btn.getAttribute('data-id'))));
+    document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', (e) => deleteRegistration(btn.getAttribute('data-id'))));
+  }
+
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  function onNextReset() {
+    resetFormFields();
+    formFeedback.innerText = "Form direset, siap input baru.";
+  }
+
+  function clampScores() {
+    nilaiIng.value = Math.min(100, Math.max(0, parseInt(nilaiIng.value) || 0));
+    nilaiMat.value = Math.min(100, Math.max(0, parseInt(nilaiMat.value) || 0));
+    nilaiUmum.value = Math.min(100, Math.max(0, parseInt(nilaiUmum.value) || 0));
+  }
+
+  function init() {
+    resetFormFields();
+    if (!tglLahirInput.value) tglLahirInput.value = "2000-01-01";
+    renderTableAndStats();
+    simpanBtn.addEventListener("click", () => { clampScores(); saveRegistration(); });
+    nextBtn.addEventListener("click", onNextReset);
+    [nilaiIng, nilaiMat, nilaiUmum].forEach(inp => inp.addEventListener("blur", clampScores));
+  }
+
+  init();
+</script>
+</body>
+</html>
